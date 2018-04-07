@@ -40,6 +40,7 @@ sudo chown -R `id -un` /data/db
 
 ### Express app creation
 
+#### Initialize server directory and install express
 In this step we will create an express app.
 For this I will use the `server` directory.
 We initialize the content (actually the `package.json` file) with npm.
@@ -56,3 +57,33 @@ We need to install Express by issuing the following command. `--save` will save 
 npm install --save express
 ```
 
+#### Additional packages
+We also need additional packages.
+
+```
+npm install --save body-parser mongoose morgan babel-preset-es2015-node6 source-map-support 
+```
+
+Detailed info about these ones:
+  * `body-parser` is a Node.js body parsing middleware. It reads a form's input and stores it as a javascript object accessible through req.body.
+  * `morgan` is a HTTP request logger middleware for node.js
+  * `babel-preset-es2015-node6` makes Node.js fully ES2015 compatible.
+  * `source-map-support` a module which provides source map support for stack traces in node via the V8 stack trace API. It uses the source-map module to replace the paths and line numbers of source-mapped files with their original paths and line numbers.
+
+#### Server implementation
+
+Create index.js:
+
+```
+touch index.js
+```
+
+The implementation of the server looks like the following:
+
+```javascript
+var express = require('express');
+var app = express();
+
+app.get('/', (req, res) => {res.send('Hello World!')})
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+```
